@@ -1,13 +1,102 @@
 body {
+  border: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.title {
+  margin: 0;
+  padding: 1em 0.3em;
+}
+
+.title a {
+  color: white;
+}
+
+.header {
+  background-color: #333;
+}
+
+.header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__plus {
+  color: white;
+}
+
+.container {
+  width: 80%;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.recipe {
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.24);
+  border-radius: 1em;
+  padding: 1em;
+  margin: 0.5em 0;
+  transition: opacity 150ms;
+}
+
+.recipe__title {
+  margin-top: 0;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.493);
+}
+
+.recipe__actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.recipe__actions svg {
+  cursor: pointer;
+}
+
+.recipe__actions a {
+  color: black;
+  margin-right: 1rem;
+}
+
+.create-recipe {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.hide {
+  opacity: 0;
+}
+
+.create-recipe__steps {
+  resize: vertical;
+}
+
+.create-recipe__title,
+.create-recipe__steps {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.create-recipe__create-btn {
+  cursor: pointer;
+  padding: 0.8em;
+  text-transform: uppercase;
+  border: none;
+  background-color: #333;
+  color: white;
+  border-radius: 1rem;
+  transition: background-color 200ms, outline-offset 200ms;
+}
+
+.create-recipe__create-btn:hover {
+  background-color: rgba(51, 51, 51, 0.863);
+  outline: 1px solid white;
+  outline-offset: -3px;
+}
+
+.create-recipe__not-found {
+  text-align: center;
 }
