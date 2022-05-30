@@ -1,9 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { v4 as uuid } from "uuid";
 
 function CreateRecipe({ onRecipeCreate }) {
   const [title, setTitle] = useState("");
   const [steps, setSteps] = useState("");
+
+  useEffect(() => {
+    // Mounting stage
+    console.log("Mounting");
+    return () => {
+      // Unmounting stage
+      console.log("Unmounting");
+    };
+  }, []);
+
+  useEffect(() => {
+    // Updating stage
+    console.log("Updating");
+  });
+
+  useEffect(() => {
+    // Updating title
+    console.log("Updating title");
+  }, [title]);
 
   const handleOnClick = () => {
     onRecipeCreate({ id: uuid(), title, steps });
