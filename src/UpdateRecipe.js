@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { v4 as uuid } from "uuid";
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
-function CreateRecipe({ onRecipeCreate }) {
+function UpdateRecipe({ onRecipeUpdate, recipes }) {
+  const { id } = useParams();
+  const navigation = useNavigate();
+
   const [title, setTitle] = useState("");
   const [steps, setSteps] = useState("");
 
-  const navigation = useNavigate();
-
   const handleOnClick = () => {
-    onRecipeCreate({ id: uuid(), title, steps });
+    onRecipeUpdate({ id, title, steps });
     navigation("/");
   };
 
@@ -20,6 +20,19 @@ function CreateRecipe({ onRecipeCreate }) {
   const handleStepsChange = (e) => {
     setSteps(e.target.value);
   };
+
+  const found = recipes.find((recipe) => recipe.id === id);
+
+  useEffect(() => {
+    if (found) {
+      setTitle(found.title);
+      setSteps(found.steps);
+    }
+  }, [found]);
+
+  if (!found) {
+    return <h2 className="create-recipe__not-found">Recipe Not Found</h2>;
+  }
 
   return (
     <div className="create-recipe container">
@@ -38,10 +51,10 @@ function CreateRecipe({ onRecipeCreate }) {
         rows={5}
       />
       <button className="create-recipe__create-btn" onClick={handleOnClick}>
-        Create Recipe
+        Update Recipe
       </button>
     </div>
   );
 }
 
-export default CreateRecipe;
+export default UpdateRecipe;
