@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 import { v4 as uuid } from "uuid";
-import Recipes from "./Recipes";
 
-function CreateRecipe() {
-  const [recipes, setRecipes] = useState([
-    { id: "1", title: "Sample Recipe", steps: "1. First step" },
-  ]);
+function CreateRecipe({ onRecipeCreate }) {
   const [title, setTitle] = useState("");
   const [steps, setSteps] = useState("");
 
   const handleOnClick = () => {
-    setRecipes([{ id: uuid(), title, steps }, ...recipes]);
+    onRecipeCreate({ id: uuid(), title, steps });
   };
 
   const handleTitleChange = (e) => {
@@ -40,8 +36,6 @@ function CreateRecipe() {
       <button className="create-recipe__create-btn" onClick={handleOnClick}>
         Create Recipe
       </button>
-
-      <Recipes dataSource={recipes} />
     </div>
   );
 }
