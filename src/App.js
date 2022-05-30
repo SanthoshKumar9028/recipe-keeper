@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Header from "./Header";
@@ -9,8 +9,17 @@ import UpdateRecipe from "./UpdateRecipe";
 export default function App() {
   const [recipes, setRecipes] = useState([]);
 
+  useEffect(() => {
+    const localRecipes = localStorage.getItem("recipes");
+    if (localRecipes) {
+      setRecipes(JSON.parse(localRecipes));
+    }
+  }, []);
+
   const handleOnRecipeCreate = (data) => {
-    setRecipes([data, ...recipes]);
+    const newRecipes = [data, ...recipes];
+    setRecipes(newRecipes);
+    localStorage.setItem("recipes", JSON.stringify(newRecipes));
   };
 
   const handleOnRecipeUpdate = (data) => {
@@ -20,12 +29,14 @@ export default function App() {
       const newRecipes = [...recipes];
       newRecipes[foundIndex] = data;
       setRecipes(newRecipes);
+      localStorage.setItem("recipes", JSON.stringify(newRecipes));
     }
   };
 
   const handleOnRecipeDelete = (id) => {
     const filteredRecipe = recipes.filter((recipe) => recipe.id !== id);
     setRecipes(filteredRecipe);
+    localStorage.setItem("recipes", JSON.stringify(filteredRecipe));
   };
 
   return (
